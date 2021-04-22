@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>{% block title} {%endblock}</title>
+    <title>{% block title %} {%endblock %}</title>
 </head>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Allegro Summer E-Xperience - Task3</a>
@@ -24,12 +24,12 @@
         </div>
     </nav>
 
-    <form method="get">
+    <form method="post">
         <div class="form-group">
             <div class="col-xs-4">
                 <label for="githubName">GitHub Name:</label>
-                <input type="text" class="form-control" id="githubName" aria-describedby="emailHelp"
-                placeholder="Enter GitHub name">
+                <input type="text" class="form-control" id="githubName" name='github_name' aria-describedby="emailHelp"
+                placeholder="Enter GitHub name" required>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
