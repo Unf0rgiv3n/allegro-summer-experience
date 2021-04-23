@@ -5,13 +5,15 @@ class GithubAPI():
 
     access_url = "https://api.github.com"
     version = "v3"
+    #max 100 according to github api
+    repos_per_page = 100
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def get_user_repos(self, username, pagination_number=None):
         access_url = self.access_url
-        endpoint = access_url + f'/users/{username}/repos?per_page=50'
+        endpoint = access_url + f'/users/{username}/repos?per_page={repos_per_page}'
         if pagination_number is not None:
             endpoint = endpoint + f'&page={pagination_number}'
         request = requests.get(endpoint)
@@ -22,7 +24,7 @@ class GithubAPI():
 
     def get_repo_pages_number(self, username):
         access_url = self.access_url
-        endpoint = access_url + f'/users/{username}/repos?per_page=50'
+        endpoint = access_url + f'/users/{username}/repos?per_page={repos_per_page}'
         request = requests.get(endpoint)
         if request.status_code in range(200,299):
             if 'link' in request.headers:
