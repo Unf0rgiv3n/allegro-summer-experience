@@ -3,6 +3,6 @@
 {% block content %}
     <p>Stars sum: {{stars_sum}}</p>
     {% for x in content %}
-        <p>Name: {{x[0]}}, stars: {{x[1]}}</p>
+        <p>{{loop.index}} Name: {{x[0]}}, stars: {{x[1]}}</p>
     {% endfor %}
 {%endblock%}

@@ -9,11 +9,30 @@ class GithubAPI():
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def get_user_repos(self, username):
+    def get_user_repos(self, username, pagination_number=None):
         access_url = self.access_url
-        endpoint = access_url + f'/users/{username}/repos'
+        endpoint = access_url + f'/users/{username}/repos?per_page=50'
+        if pagination_number is not None:
+            endpoint = endpoint + f'&page={pagination_number}'
         request = requests.get(endpoint)
         if request.status_code in range(200,299):
             return request.json()
+        else:
+            raise Exception("failed to request")
+
+    def get_repo_pages_number(self, username):
+        access_url = self.access_url
+        endpoint = access_url + f'/users/{username}/repos?per_page=50'
+        request = requests.get(endpoint)
+        if request.status_code in range(200,299):
+            if 'link' in request.headers:
+                links = request.headers['link']
+                links_arr = links.split(';')
+                #we are taking second from last cus there is coded a max number of pages
+                #[' rel', '"next", <https://api.github.com/user/562236/repos?per_page', '50&page', '2>']
+                number_of_pages = links_arr[-2].split('=')[-1].split('>')[0]
+                return int(number_of_pages)
+            else:
+                return 1
         else:
             raise Exception("failed to request")

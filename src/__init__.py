@@ -19,17 +19,20 @@ def create_app(test_config=None):
     except  OSError:
         pass
 
-    @app.route('/home', methods=['GET', 'POST'])
+    @app.route('/', methods=['GET', 'POST'])
     def home():
         if request.method == 'POST':
             username = request.form['github_name']
             github = GithubAPI()
-            json_response = github.get_user_repos(username)
+            pages_max = github.get_repo_pages_number(username)
+            
             repos_list = []
             stargazer_sum = 0
-            for response in json_response:
-                repos_list.append((response['name'], response['stargazers_count']))
-                stargazer_sum += response['stargazers_count']    
+            for page in range(pages_max):
+                json_response = github.get_user_repos(username, page+1)
+                for response in json_response:
+                    repos_list.append((response['name'], response['stargazers_count']))
+                    stargazer_sum += response['stargazers_count']    
             return render_template('index.html', content=repos_list, stars_sum=stargazer_sum)
         
         return render_template('empty_index.html')
