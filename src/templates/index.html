@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Main{% endblock%}
 {% block content %}
+    <p>User: {{user}}</p>
     <p>Stars sum: {{stars_sum}}</p>
     {% for x in content %}
         <p>{{loop.index}} Name: {{x[0]}}, stars: {{x[1]}}</p>
