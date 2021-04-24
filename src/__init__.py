@@ -24,6 +24,7 @@ def create_app(test_config=None):
     def home():
         if request.method == 'POST':
             username = request.form['github_name']
+            sort_option = request.form['options']
             github = GithubAPI()
             try:
                 pages_max = github.get_repo_pages_number(username)
@@ -34,7 +35,7 @@ def create_app(test_config=None):
             stargazer_sum = 0
             for page in range(pages_max):
                 try:
-                    json_response = github.get_user_repos(username, page+1)
+                    json_response = github.get_user_repos(username,sort_option,page+1)
                 except:
                     return render_template('error.html')
                 for response in json_response:

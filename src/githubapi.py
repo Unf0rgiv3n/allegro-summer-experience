@@ -16,9 +16,10 @@ class GithubAPI():
             self.token = token
             self.headers = {'Authorization': 'token ' + token}
 
-    def get_user_repos(self, username, pagination_number=None):
+    def get_user_repos(self, username, sort_option ,pagination_number=None):
         access_url = self.access_url
         endpoint = access_url + f'/users/{username}/repos?per_page={self.repos_per_page}'
+        endpoint = endpoint + f'&sort={sort_option}'
         if pagination_number is not None:
             endpoint = endpoint + f'&page={pagination_number}'
         if  self.token is not None:
