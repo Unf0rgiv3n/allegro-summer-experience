@@ -1,6 +1,6 @@
 import os
 from .githubapi import GithubAPI
-from .tokenConf import *
+#from .tokenConf import *
 
 from flask import Flask, redirect, url_for, render_template, request
 
