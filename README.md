@@ -62,6 +62,6 @@ https://docs.github.com/en/rest
 
 -Poprawić frontend aplikacji, dodać paginację wyników - wszystkie wyniki są prezentowane na jednej stronie np dla microsoftu będzie to ok. 4 tys rekordów.
 
--Dodać prostą możliwość autoryzacji tokenem ze strony frontendu
+-Dodać możliwość wpisania tokenu na stronie, żeby nie musiec wpisywać go w kodzie
 
 Dziękuje za poświęcony czas i smacznej kawusi życzę ☕ :)
